@@ -70,6 +70,6 @@ The package just requires the installation of the following packages
 - matplotlib
 - customtkinter
 
-You can just install from the requirement.txt file indicated as
+You can just install from the requirement.txt file:
 
 pip install -r requirements.txt
