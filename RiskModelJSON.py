@@ -138,35 +138,3 @@ class RiskModel:
         """ Selects the optimal MSO mode for a given waypoint to minimize risk and maximize efficiency """
         risks = {mode["mode_name"]: self.compute_total_risk(ttg, mode["mode_name"]) for mode in self.modes}
         return min(risks, key=risks.get)
-
-
-
-# Usage example
-config_path = "ship_config.json"
-risk_model = RiskModel(config_path)
-
-ttgs = np.linspace(0, 600, 300)
-total_risk = 0
-risk_list = []
-
-
-
-for ttg in ttgs:
-    mode = risk_model.select_mso_mode(ttg)
-    risk = risk_model.compute_total_risk(ttg, mode)
-    print(mode, risk)
-    risk_list.append(risk)
-    total_risk += risk
-    
-print(f"Total Risk: {total_risk}")
-
-
-
-
-
-
-
-plt.plot(ttgs, risk_list)
-plt.ylabel('Risk')
-plt.xlabel('TTG (seconds)')
-plt.show()

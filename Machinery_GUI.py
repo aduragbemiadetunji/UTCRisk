@@ -25,30 +25,6 @@ class RiskAnalysisApp(ctk.CTk):
         self.engine_frame = None  # Placeholder for engine frame
         self.modes_frame = None  # Placeholder for modes frame
 
-    # def create_ship_config_section(self):
-    #     title = ctk.CTkLabel(self.ship_config_frame, text="Ship Configuration", font=ctk.CTkFont(size=15, weight="bold"))
-    #     title.pack(pady=5)
-
-    #     self.ship_name_entry = ctk.CTkEntry(self.ship_config_frame, placeholder_text="Ship Model/Type")
-    #     self.ship_name_entry.pack(pady=5)
-
-    #     self.length_entry = ctk.CTkEntry(self.ship_config_frame, placeholder_text="Length (m)")
-    #     self.length_entry.pack(pady=5)
-
-    #     self.width_entry = ctk.CTkEntry(self.ship_config_frame, placeholder_text="Width (m)")
-    #     self.width_entry.pack(pady=5)
-
-    #     self.mass_entry = ctk.CTkEntry(self.ship_config_frame, placeholder_text="Mass/Displacement (tons)")
-    #     self.mass_entry.pack(pady=5)
-
-    #     self.num_engines_entry = ctk.CTkEntry(self.ship_config_frame, placeholder_text="Number of Engines")
-    #     self.num_engines_entry.pack(pady=5)
-
-    #     # Button to proceed to engine parameters after ship configuration
-    #     self.load_engines_button = ctk.CTkButton(self.ship_config_frame, text="Next: Define Engines", command=self.load_engine_parameters)
-    #     self.load_engines_button.pack(pady=10)
-
-
 
     def create_ship_config_section(self):
         title = ctk.CTkLabel(self.ship_config_frame, text="Ship Configuration", font=ctk.CTkFont(size=15, weight="bold"))
@@ -106,13 +82,6 @@ class RiskAnalysisApp(ctk.CTk):
         # Button to proceed to engine parameters after ship configuration
         self.load_engines_button = ctk.CTkButton(self.ship_config_frame, text="Next: Define Engines", command=self.load_engine_parameters)
         self.load_engines_button.grid(row=5, column=0, columnspan=4, pady=10)
-
-
-
-
-
-
-
 
 
 
@@ -215,24 +184,6 @@ class RiskAnalysisApp(ctk.CTk):
 
 
 
-    def add_scenario_row3(self, scenario_frame, mode_index):
-        row = len(scenario_frame.grid_slaves()) // 2 + 1
-
-        # Combined dropdown for action and engine selection
-        action_options = [f"Restart {engine}" for engine in self.engine_names] + [f"Start {engine}" for engine in self.engine_names]
-        action_dropdown = ctk.CTkOptionMenu(scenario_frame, values=action_options)
-        action_dropdown.grid(row=row, column=0, padx=5, pady=5)
-
-        # AND/OR/Terminate operation selection
-        operation_type = ctk.CTkOptionMenu(scenario_frame, values=["Terminate", "AND", "OR"])
-        operation_type.grid(row=row, column=1, padx=5, pady=5)
-
-        # Configure command to capture the operation choice
-        operation_type.configure(command=lambda: self.handle_operation(operation_type.get(), scenario_frame, row, mode_index))
-
-        # Append the initial scenario to the correct mode's scenario list
-        self.modes[mode_index]["scenarios"].append((action_dropdown, operation_type))
-
     def handle_operation(self, operation, scenario_frame, row, mode_index):
         """
         Handles the addition of extra actions in case of 'AND' or 'OR' operations
@@ -258,15 +209,6 @@ class RiskAnalysisApp(ctk.CTk):
 
 
 
-
-
-
-
-
-
-
-
-
     # Modify add_scenario_row to add scenarios to the specific mode's scenarios list
     def add_scenario_row(self, scenario_frame, mode_index):
         row = len(scenario_frame.grid_slaves()) // 2 + 1
@@ -285,52 +227,6 @@ class RiskAnalysisApp(ctk.CTk):
         self.modes[mode_index]["scenarios"].append((action_dropdown, operation_type))
 
 
-
-
-
-
-
-
-
-
-
-    def add_mode2(self):
-        mode_name = self.mode_name_entry.get()
-        if not mode_name:
-            messagebox.showerror("Input Error", "Please enter a mode name.")
-            return
-
-        # Create a new frame for the mode's scenarios horizontally
-        mode_index = len(self.modes)
-        scenario_frame = ctk.CTkFrame(self.modes_frame, corner_radius=10)
-        scenario_frame.grid(row=2, column=mode_index, padx=10, pady=5, sticky="nsew")
-
-        # Header for the scenario section
-        mode_title = ctk.CTkLabel(scenario_frame, text=f"Mode: {mode_name}", font=ctk.CTkFont(size=13, weight="bold"))
-        mode_title.grid(row=0, column=0, columnspan=2, pady=5)
-
-        # Button to add scenarios within the mode
-        self.add_scenario_button = ctk.CTkButton(scenario_frame, text="Add Scenario", command=lambda: self.add_scenario_row(scenario_frame))
-        self.add_scenario_button.grid(row=1, column=0, columnspan=2, pady=5)
-
-        # Save mode and its associated scenario frame
-        self.modes.append({"name": mode_name, "frame": scenario_frame, "scenarios": []})
-
-    def add_scenario_row2(self, scenario_frame):
-        row = len(scenario_frame.grid_slaves()) // 2 + 1
-
-        # Combined dropdown for action and engine selection
-        action_options = [f"Restart {engine}" for engine in self.engine_names] + [f"Start {engine}" for engine in self.engine_names]
-        action_dropdown = ctk.CTkOptionMenu(scenario_frame, values=action_options)
-        action_dropdown.grid(row=row, column=0, padx=5, pady=5)
-
-        # AND/OR/Terminate operation selection
-        operation_type = ctk.CTkOptionMenu(scenario_frame, values=["Terminate", "AND", "OR"],
-                                           command=lambda op, row=row: self.add_additional_action(op, scenario_frame, row))
-        operation_type.grid(row=row, column=1, padx=5, pady=5)
-
-        # Save scenario to the last added mode
-        self.modes[-1]["scenarios"].append((action_dropdown, operation_type))
 
     def add_additional_action(self, operation, scenario_frame, row):
         if operation == "Terminate":
