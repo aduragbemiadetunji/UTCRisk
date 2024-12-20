@@ -87,10 +87,6 @@ class RiskModel:
             p_start_hsg_dg2 = self._recovery_time_probability(ttg, self.restart_hsg_time)
 
 
-            # return 1 - p_restart_me
-            # print((1 - p_restart_me) or (1 - (p_start_dg1 and p_start_hsg_dg1)) or (1 - (p_start_dg2 and p_start_hsg_dg2)))
-            # print('------')
-            # print((1 - p_restart_me) * (1 - (p_start_dg1 and p_start_hsg_dg1)) * (1 - (p_start_dg2 and p_start_hsg_dg2)))
             return (1 - p_restart_me) * (1 - (p_start_dg1 * p_start_hsg_dg1)) * (1 - (p_start_dg2 * p_start_hsg_dg2))
         elif mode == 'MEC':
             # Restart ME or Start HSG
@@ -126,19 +122,8 @@ class RiskModel:
         for mode in self.machinery_modes:
             risks[mode] = self.compute_total_risk(ttg, mode)
 
-        # print(risks)
-        # print(min(risks, key=risks.get))
-        # Return the mode with the lowest risk
         return min(risks, key=risks.get)
-    
-    # def path_risk_evaluation(self):
-    #     """ Evaluates the total risk for the entire path, across all waypoints """
-    #     total_risk = 0
-    #     for waypoint in self.waypoints:
-    #         mode = self.select_mso_mode(waypoint)
-    #         total_risk += self.compute_total_risk(waypoint, mode)
-        
-    #     return total_risk
+
 
 
 # Initialize the RiskModel with parameters
@@ -149,17 +134,6 @@ risk_model = RiskModel(
     start_me_time=50, restart_me_probability=0.4, start_dg1_time=35, restart_dg1_probability=0.5, 
     start_dg2_time=35, restart_dg2_probability=0.5, restart_hsg_time=12,
 )
-
-# risk_model = RiskModel(
-#     ship_mass=5335, max_propulsion_power=2160, heading=0, velocity=10, yaw_rate=0.02, 
-#     machinery_modes=['PTO', 'MEC', 'PTI'], wind_speed=10, wind_direction=250, 
-#     current_speed=1, current_direction=90, cost_ship=100000, cost_environment=50000, 
-#     cost_cargo=200000, cost_infrastructure=150000, cost_reputation=10000, 
-#     failure_rate_me=3e-9, failure_rate_dg1=6e-9, failure_rate_dg2=6e-9, failure_rate_hsg=2e-9, 
-#     start_me_time=50, restart_me_probability=0.4, start_dg1_time=35, restart_dg1_probability=0.5, 
-#     start_dg2_time=35, restart_dg2_probability=0.5, restart_hsg_time=12, 
-#     ttg_data={"WP1": 150, "WP2": 120}, waypoints=["WP1", "WP2"]
-# )
 
 
 

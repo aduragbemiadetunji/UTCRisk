@@ -69,10 +69,7 @@ class RiskModel:
                 failure_rate = self.engines.get(mapped_engine_name, {}).get("failure_rate", 0)
                 failure_rates.append(failure_rate)
 
-        
-        # total_failure_rate = sum(failure_rates) #WHYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY???????
-        # print(total_failure_rate)
-        # return 1 - np.exp(-total_failure_rate)
+    
     
         combined_failure_probability = 1 - np.prod([1 - rate for rate in failure_rates])
         return combined_failure_probability
@@ -99,7 +96,6 @@ class RiskModel:
                 continue
 
             # Compute probability of this action
-            # p_action = engine_data["restart_probability"] * self._recovery_time_probability(ttg, engine_data["start_time"])
             # Distinguish between "start" and "restart" actions
             if "start" in action.lower():
                 # Start actions assume a probability of 1
