@@ -1,4 +1,4 @@
-from RiskModelJSON import RiskModel
+from risk_model.risk_model import RiskModel
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -7,7 +7,7 @@ config_path = "ship_config.json"
 risk_model = RiskModel(config_path)
 
 
-case_example = 1 #1, 2, 3
+case_example = 3 #1, 2, 3
 """ 
     case 1: For getting risk for a single ttg value
     case 2: For getting total risk given a couple of ttg values like in case of a trajectory

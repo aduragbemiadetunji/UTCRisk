@@ -1,0 +1,103 @@
+{
+    "ship_configuration": {
+        "ship_model": "Autonomous Vessel",
+        "length": "80",
+        "width": "16",
+        "mass": "70"
+    },
+    "grouding_cost": {
+        "ship_damage": "100000",
+        "recovery": "200000",
+        "cargo": "30000",
+        "environment": "50000",
+        "infrastructure": "150000",
+        "reputation": "10000"
+    },
+    "engines": [
+        {
+            "engine_name": "ME",
+            "failure_rate": "3e-9", 
+            "start_time": "50",
+            "restart_probability": "0.4"
+        },
+        {
+            "engine_name": "DG1",
+            "failure_rate": "6e-9",
+            "start_time": "35",
+            "restart_probability": "0.5"
+        },
+        {
+            "engine_name": "DG2",
+            "failure_rate": "6e-9",
+            "start_time": "35",
+            "restart_probability": "0.5"
+        },
+        {
+            "engine_name": "HSG",
+            "failure_rate": "2e-9",
+            "start_time": "12",
+            "restart_probability": "0.8"
+        }
+    ],
+    "modes": [
+        {
+            "mode_name": "PTO",
+            "scenarios": [
+                {
+                    "action": "Restart Engine 1",
+                    "operation": "Terminate"
+                },
+                {
+                    "action": "Start Engine 2",
+                    "operation": "AND"
+                },
+                {
+                    "action": "Start Engine 4",
+                    "operation": "Terminate"
+                },
+                {
+                    "action": "Start Engine 3",
+                    "operation": "AND"
+                },
+                {
+                    "action": "Start Engine 4",
+                    "operation": "Terminate"
+                }                
+            ]
+        },
+        {
+            "mode_name": "MEC",
+            "scenarios": [
+                {
+                    "action": "Restart Engine 1",
+                    "operation": "Terminate"
+                },
+                {
+                    "action": "Start Engine 4",
+                    "operation": "Terminate"
+                }
+            ]
+        },
+        {
+            "mode_name": "PTI",
+            "scenarios": [
+                {
+                    "action": "Restart Engine 2",
+                    "operation": "Terminate"
+                },
+                {
+                    "action": "Restart Engine 3",
+                    "operation": "Terminate"
+                },
+                {
+                    "action": "Start Engine 1",
+                    "operation": "Terminate"
+                },
+                {
+                    "action": "Restart Engine 4",
+                    "operation": "Terminate"
+                }
+            ]
+        }
+    ]
+}
