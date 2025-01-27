@@ -66,37 +66,38 @@ The risk_example file has three ways to use the models based on need and the str
 
 ## Installation
 
-The package just requires the installation of the following packages
-- numpy
-- matplotlib
-- customtkinter
+    The package just requires the installation of the following packages
+    - numpy
+    - matplotlib
+    - customtkinter
 
 
 1. Clone the Repository 
 
-git clone https://github.com/aduragbemiadetunji/UTCRisk
-cd UTCRisk
+    git clone https://github.com/aduragbemiadetunji/UTCRisk
+
+    cd UTCRisk
 
 2. Install the Package: Use pip to install the package in editable mode:
 
-pip install -e . 
+    pip install -e . 
 
 3. Install Additional Dependencies (if not automatically installed): If the requirements are not installed during setup, install them manually:
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 
 ## How to Use
 
 1. Run Example Scripts: Use the provided example scripts in the examples/ directory:
 
-python examples/risk_example.py
+    python examples/risk_example.py
 
 2. Use the GUI: Run the GUI to generate JSON configurations:
 
-python -m risk_model.gui
+    python -m risk_model.gui
 
 ## Uninstallation
 
-pip uninstall utcrisk
+    pip uninstall utcrisk
 
